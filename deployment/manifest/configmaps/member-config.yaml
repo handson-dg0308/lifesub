@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: member-config
+data:
+  SERVER_PORT: "8080"
+  POSTGRES_HOST: "postgres-member-postgresql"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "member"
+  JWT_ACCESS_TOKEN_VALIDITY: "3600000"
+  JWT_REFRESH_TOKEN_VALIDITY: "86400000"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config
+data:
+  ALLOWED_ORIGINS: "http://20.214.124.16"
+  JPA_DDL_AUTO: "update"
+  JPA_SHOW_SQL: "true"

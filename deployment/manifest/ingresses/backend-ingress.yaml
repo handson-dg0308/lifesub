@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: dg0308.20.249.184.228.nip.io
+    http:
+      paths:
+      - path: /api/auth
+        pathType: Prefix
+        backend:
+          service:
+            name: member
+            port:
+              number: 80
+      - path: /api/mysub
+        pathType: Prefix
+        backend:
+          service:
+            name: mysub
+            port:
+              number: 80
+      - path: /api/recommend
+        pathType: Prefix
+        backend:
+          service:
+            name: recommend
+            port:
+              number: 80

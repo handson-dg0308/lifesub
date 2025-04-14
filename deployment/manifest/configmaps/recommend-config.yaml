@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: recommend-config
+data:
+  SERVER_PORT: "8080"
+  POSTGRES_HOST: "postgres-recommend-postgresql"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "recommend"

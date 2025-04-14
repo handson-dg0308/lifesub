@@ -1,25 +1,13 @@
-# Build stage
-FROM openjdk:23-oraclelinux8 AS builder
+FROM openjdk:21-jdk-slim
+
 ARG BUILD_LIB_DIR
 ARG ARTIFACTORY_FILE
-COPY ${BUILD_LIB_DIR}/${ARTIFACTORY_FILE} app.jar
 
-# Run stage
-FROM openjdk:23-slim
-ENV USERNAME k8s
-ENV ARTIFACTORY_HOME /home/${USERNAME}
-ENV JAVA_OPTS=""
+WORKDIR /app
 
-# Add a non-root user
-RUN adduser --system --group ${USERNAME} && \
-   mkdir -p ${ARTIFACTORY_HOME} && \
-   chown ${USERNAME}:${USERNAME} ${ARTIFACTORY_HOME}
+COPY ${BUILD_LIB_DIR}/${ARTIFACTORY_FILE} /app/app.jar
 
-WORKDIR ${ARTIFACTORY_HOME}
-COPY --from=builder app.jar app.jar
-RUN chown ${USERNAME}:${USERNAME} app.jar
+ENV PORT=8080
+EXPOSE ${PORT}
 
-USER ${USERNAME}
-
-ENTRYPOINT [ "sh", "-c" ]
-CMD ["java ${JAVA_OPTS} -jar app.jar"]
+CMD ["java", "-jar", "app.jar"]
